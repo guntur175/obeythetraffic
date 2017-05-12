@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar primary>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+ <form  #signupForm="ngForm">
+  <ion-list>
+
+   <ion-item>
+        <ion-label>Jenis Kendaraan</ion-label>
+        <ion-select>
+          <ion-option value="Mobil">Mobil</ion-option>
+          <ion-option value="Motor">Motor</ion-option>
+        </ion-select>
+       </ion-item>
+
+
+    <ion-item>
+      <ion-input [(ngModel)]="plat_nomor" name="asd" required type="text" placeholder="subject"></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-input [(ngModel)]="pelanggaran" name="asd1" required type="text" placeholder="pelanggaran"></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-input [(ngModel)]="lastImage" name="asd2" required type="text" placeholder="foto"></ion-input>
+    </ion-item>
+
+  </ion-list>
+  <button  (click)="onSignup(signupForm)" type="submit" ion-button full medium>Create Account</button>
+ </form>
+
+
+
+</ion-content>
