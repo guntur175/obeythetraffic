@@ -8,7 +8,7 @@ import { AuthHttp } from 'angular2-jwt';
 import 'rxjs/add/operator/map';
 //,File, Transfer, FilePat
 
-let apiURL = 'http://172.18.16.83/tilang-report/public/api/postings';
+let apiURL = 'http://172.18.16.97/obeythetraffic/adminweb/public/api/postings';
 
 declare var  cordova:any;
 @Component({

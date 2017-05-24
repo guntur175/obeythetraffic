@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { LoginPage } from '../login/login';
+import { TabsPage } from '../tabs/tabs';
 /*
   Generated class for the Onboarding page.
 
@@ -34,7 +35,8 @@ export class OnboardingPage {
 
       skip()
       {
-        this.navCtrl.setRoot(LoginPage);
+//        this.navCtrl.setRoot(LoginPage);
+        this.navCtrl.setRoot(TabsPage);
       }
 
 }

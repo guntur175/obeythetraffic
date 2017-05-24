@@ -23,7 +23,7 @@
                             <td>Pelanggaran</td>
                             <td>Jenis Kendaraan</td>
                             <td>Plat Nomor</td>
-                            <td>Gambar</td>
+                            <td>Image</td>
                             <td>Created at</td>
                             <td>Updated at</td>
                             <td>Action</td>
@@ -36,7 +36,8 @@
                             <td>{{ $posting -> jenis_kendaraan }}</td>
                             <td>{{ $posting -> plat_nomor }}</td>
                             <td>
-                                <img src="{{ url('/img/',$posting->lastImage) }}" width="50" height="50" alt="..."  class="img-responsive">
+                                <!--<img src="{{ url('/img/',$posting->lastImage) }}" width="50" height="50" alt="..."  class="img-responsive">-->
+                                <a href="{{ $posting -> lastImage}}">{{ $posting -> lastImage}}</a> 
                             </td>
                             <td>{{ $posting -> created_at }}</td>
                             <td>{{ $posting -> updated_at }}</td>

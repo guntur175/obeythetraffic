@@ -69,6 +69,7 @@ class PostingController extends Controller
         if ($request->hasFile('lastImage')){
             $data['lastImage'] = $this->savePhoto($request->file('lastImage'));
         } 
+       
  
         $posting = \App\Posting::create($data);
 
@@ -77,10 +78,18 @@ class PostingController extends Controller
     }
 
     public function savePhoto(UploadedFile $photo) {
-        $fileName = str_random(40) . '.' . $photo->guessClientExtension();
-        $destinationPath = public_path() . DIRECTORY_SEPARATOR . 'img';
-        $photo -> move($destinationPath, $fileName);
-        return $fileName;
+        // $fileName = str_random(40) . '.' . $photo->guessClientExtension();
+        // $destinationPath = public_path() . DIRECTORY_SEPARATOR . 'img';
+        // $photo -> move($destinationPath, $fileName);
+        // return $fileName;
+        
+        $fileName = $photo->getClientOriginalName();
+        $ip = request()->ip();
+        $getPath = 'http://10.107.217.24/obeythetraffic/adminweb/public/img/' . $fileName;
+        // $getPath = 'http://' . $ip . '/obeythetraffic/adminweb/public/img/' . $fileName;
+        $destinationPath = public_path() . DIRECTORY_SEPARATOR . 'img/';
+        $photo -> move($destinationPath, $fileName, $getPath);
+        return $getPath;
     }
 
     /**

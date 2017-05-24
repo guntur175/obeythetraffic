@@ -1,6 +1,6 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
+  <ion-navbar color="primary">
+    <ion-title color="light"  style="text-align: center">
       Timeline
     </ion-title>
      <ion-buttons end>
@@ -11,21 +11,38 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="cards-bg">
+  <ion-card *ngFor="let post of data">
 
+    <img class="size-img" [src]="post.lastImage" *ngIf="post.lastImage">
 
-  
-    <div *ngFor="let post of data">
-      <ion-list class="bor" (click)="openPage()">
-        <ion-item>
-          <ion-thumbnail item-left>
-          <img [src]="post.lastImage" *ngIf="post.lastImage">
-          </ion-thumbnail>
+    <ion-card-content>
+      <ion-card-title>
+        {{post.jenis_kendaraan}}
+      </ion-card-title>
+      <p>Jenis Pelanggaran  : {{post.pelanggaran}}</p>
+      <p>Plat Nomor         : {{post.plat_nomor}}</p>
+    </ion-card-content>
 
-          <h2>{{post.jenis_kendaraan}}</h2>
-          <p>{{post.plat_nomor}}</p>
-          <p>{{post.pelanggaran}}</p>
-        </ion-item>
-      </ion-list>
-    </div>
-</ion-content>
+    <ion-row no-padding>
+      <ion-col>
+        <button ion-button clear small color="danger" icon-left>
+          <ion-icon name='star'></ion-icon>
+          Favorite
+        </button>
+      </ion-col>
+      <ion-col text-center>
+        <button ion-button clear small color="danger" icon-left>
+          <ion-icon name='text'></ion-icon>
+          Comment
+        </button>
+      </ion-col>
+      <ion-col text-right>
+        <button ion-button clear small color="danger" icon-left>
+          <ion-icon name='share-alt'></ion-icon>
+          Share
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+  </ion-content>

@@ -12,7 +12,7 @@ import { OnboardingPage } from '../pages/onboarding/onboarding';
   templateUrl: 'app.html'
 })
 export class MyApp {
-rootPage = OnboardingPage;
+rootPage = TabsPage;
 // rootPage = LoginPage;
 
 

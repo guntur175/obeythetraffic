@@ -43,7 +43,7 @@ export class LoginPage {
 
   private onSignInSuccess(): void {
     
-    this.navCtrl.setRoot(ProfilePage);
+    this.navCtrl.push(TabsPage);
   }
 
   ionViewDidLoad() {

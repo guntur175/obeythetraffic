@@ -16,8 +16,8 @@ export class TabsPage {
   tab2Root: any = UploadPage;
   tab3Root: any = ProfilePage;
    constructor(public navCtrl: NavController) {
-    if(!localStorage.getItem("token")) {
-      navCtrl.setRoot(LoginPage);
-    }
+    // if(!localStorage.getItem("token")) {
+    //   navCtrl.setRoot(TabsPage);
+    // }
   }
 }

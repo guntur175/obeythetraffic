@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map';
   for more info on providers and Angular 2 DI.
 */
 
-let apiURL = 'http://172.18.16.83/tilang-report/public/api/postings';
+let apiURL = 'http://10.107.217.24/obeythetraffic/adminweb/public/api/postings';
 
 
 @Injectable()
