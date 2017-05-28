@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
+import { Component,ElementRef,OnInit } from '@angular/core';
 import { NavController, NavParams,LoadingController, ToastController } from 'ionic-angular';
 import { CreatePage } from '../createacc/createacc';
 import { UserAuth } from '../../providers/user';
 import { TabsPage } from '../tabs/tabs';
-import { ProfilePage } from '../profile/profile'
-import { Facebook } from '@ionic-native/facebook';
+import { ProfilePage } from '../profile/profile';
 
+import { Facebook } from '@ionic-native/facebook';
 import { AuthService } from '../../providers/auth-service';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import {AuthProviders, AuthMethods,  AngularFire, FirebaseListObservable } from 'angularfire2';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
@@ -24,31 +24,57 @@ import firebase from 'firebase';
 })
 export class LoginPage {
 
-  loading:any;
-  loginData = { username:'', password:''};
-  data:any;
-  userProfile: any = null;
-
-   items: FirebaseListObservable<any[]>;
-
-  constructor(public af: AngularFire ,public _auth:AuthService, public facebook: Facebook,public navCtrl: NavController, public navParams: NavParams, public userauth:UserAuth, public loadingCtrl: LoadingController, private toastCtrl: ToastController) 
-  {
- this.items = af.database.list('/items');
-
+   root:any;
+  constructor(public navCtrl: NavController,public af: AngularFire, public element: ElementRef) {
+    this.element.nativeElement;
   }
-  signInWithFacebook(): void {
-    this._auth.signInWithFacebook()
-      .then(() => this.onSignInSuccess());
+  ngOnInit(){
+    this.root = this.element.nativeElement;
+  	var fbBtn =  this.root.querySelector('#fb-login');
+  	fbBtn.addEventListener('click',this.onFacebookLogin.bind(this));
   }
+  onFacebookLogin(e){
+  	let self = this;
+  	this.af.auth.login({
+  		provider: AuthProviders.Facebook,
+  		method: AuthMethods.Popup
+  	}).then(function(response){
+  		let user = {
+        name: response.auth.displayName,
+  			email:response.auth.email,
+  			picture:response.auth.photoURL
+  		};
+  		window.localStorage.setItem('user',JSON.stringify(user));
+      this.navCtrl.setRoot(TabsPage);
 
-  private onSignInSuccess(): void {
+      //app.setRootpage(TabsPage);
+  	}).catch(function(error){
+  		console.log(error);
+  	});
+}
+//   data:any;
+  
+//    items: FirebaseListObservable<any[]>;
+
+//   constructor(public af: AngularFire ,public _auth:AuthService,public navCtrl: NavController, public navParams: NavParams, public userauth:UserAuth, public loadingCtrl: LoadingController, private toastCtrl: ToastController) 
+//   {
+//  this.items = af.database.list('/items');
+
+//   }
+//   signInWithFacebook(): void {
+//     this._auth.signInWithFacebook()
+//       .then(() => this.onSignInSuccess());
+//   }
+
+//   private onSignInSuccess(): void {
     
-    this.navCtrl.push(TabsPage);
-  }
+//     this.navCtrl.setRoot(TabsPage);
+//   }
 
-  ionViewDidLoad() {
-  }
-//   facebookLogin(){
+//   ionViewDidLoad() {
+//   }
+}    
+  //   facebookLogin(){
 //     this.facebook.login(['email']).then( (response) => {
 //         const facebookCredential = firebase.auth.FacebookAuthProvider
 //             .credential(response.authResponse.accessToken);
@@ -79,31 +105,4 @@ export class LoginPage {
 //     });
 //   }
  
-  createAccount() 
-  {
-    this.navCtrl.push(CreatePage);
-  }
-  showLoader()
-  {
-    this.loading = this.loadingCtrl.create({
-        content: 'Proses login...'
-    });
 
-    this.loading.present();
-  }
-  presentToast(msg) {
-    let toast = this.toastCtrl.create({
-      message: msg,
-      duration: 3000,
-      position: 'bottom',
-      dismissOnPageChange: true
-    });
-
-    toast.onDidDismiss(() => {
-      console.log('Dismissed toast');
-    });
-
-    toast.present();
-  }
-
-}

@@ -3,11 +3,11 @@
     <div class= "container">
         <div class= "row">
             <div class= "col-md-12">
-                <h3> Daftar Pelanggaran  <a href= "{{ route('postings.create') }}" class= "btn btn-danger btn-sm" >+</a></h3>
+                <h3>Daftar Pelanggaran Pengendara  <a href= "{{ route('postings.create') }}" class= "btn btn-danger btn-sm" >+</a></h3>
                 <div class= "col-md-4">
                     {!! Form::open(['url' => 'postings', 'method'=>'get', 'class'=>'form-inline']) !!}
 
-                        <div class="form-group {!! $errors->has('query') ? 'has-error' : '' !!}">
+                        <div class="form-group {!! $errors->has('query') ? 'has-error' : '' !!}" >
                         {!! Form::text('query', isset($query) ? $query : null, ['class'=>'form-control','placeholder' => 'Searching...']) !!}
                         {!! $errors->first('query', '<p class="help-block">:message</p>') !!}
                         </div>
@@ -17,30 +17,42 @@
                     {!! Form::close() !!}
                  </div>
 
-                <table class= "table table-hover">
+                <table class= "table table-bordered">
                     <thead>
                         <tr>
                             <td>Pelanggaran</td>
                             <td>Jenis Kendaraan</td>
                             <td>Plat Nomor</td>
                             <td>Image</td>
-                            <td>Created at</td>
-                            <td>Updated at</td>
+                            <td>Waktu Kejadian</td>
+                            <!--<td>Updated at</td>-->
                             <td>Action</td>
                         </tr> 
                     </thead>
                     <tbody>
                         @forelse( $postings as $posting)
-                        <tr>
+                        <tr> 
                             <td>{{ $posting -> pelanggaran }} </td>
                             <td>{{ $posting -> jenis_kendaraan }}</td>
                             <td>{{ $posting -> plat_nomor }}</td>
                             <td>
+                     <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#1" > {{ $posting -> pelanggaran }}</button>
+                    <div class="modal fade" id=1 tabindex="1" role="dialog" aria-labelledby="myLargeModalLabel">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <img width="640" height="480" src="{{ $posting -> lastImage}}" class="img-rounded">
+                            </div>
+                        </div>
+                    </div>-->
+
+
                                 <!--<img src="{{ url('/img/',$posting->lastImage) }}" width="50" height="50" alt="..."  class="img-responsive">-->
-                                <a href="{{ $posting -> lastImage}}">{{ $posting -> lastImage}}</a> 
+                                <img src="{{ $posting -> lastImage }}" style="height:200px;width:200px;text-align:center"> 
+                                <a href="{{ $posting -> lastImage}}"><h5>Lihat Detail</h5></a>
+
                             </td>
                             <td>{{ $posting -> created_at }}</td>
-                            <td>{{ $posting -> updated_at }}</td>
+                            <!--<td>{{ $posting -> updated_at }}</td>-->
                             <td>
                                 <a href = "{{ route('postings.edit', $posting->id)}}" class = "btn btn-xs btn-success">Edit</a> |
                                 {!! Form::model($posting, ['route' => ['postings.destroy', $posting], 'method' => 'delete', 'class' => 'form-inline'] ) !!}

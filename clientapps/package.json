@@ -29,9 +29,10 @@
         "cordova-plugin-compat": "^1.1.0",
         "cordova-plugin-console": "^1.0.5",
         "cordova-plugin-device": "^1.1.4",
+        "cordova-plugin-facebook4": "file:node_modules\\cordova-plugin-facebook4",
         "cordova-plugin-splashscreen": "^4.0.3",
         "cordova-plugin-statusbar": "^2.2.1",
-        "cordova-plugin-whitelist": "1.3.1",
+        "cordova-plugin-whitelist": "^1.3.1",
         "cordova-plugin-x-toast": "^2.6.0",
         "firebase": "^3.9.0",
         "ionic-angular": "2.1.0",
@@ -44,7 +45,8 @@
     },
     "devDependencies": {
         "@ionic/app-scripts": "^1.1.4",
-        "@ionic/cli-plugin-ionic-angular": "1.0.0",
+        "@ionic/cli-plugin-cordova": "1.2.1",
+        "@ionic/cli-plugin-ionic-angular": "1.2.0",
         "@types/request": "0.0.30",
         "typescript": "2.0.9"
     },
@@ -66,7 +68,11 @@
             "cordova-plugin-splashscreen": {},
             "cordova-plugin-statusbar": {},
             "cordova-plugin-whitelist": {},
-            "ionic-plugin-keyboard": {}
+            "ionic-plugin-keyboard": {},
+            "cordova-plugin-facebook4": {
+                "APP_ID": "415689372112662",
+                "APP_NAME": "tabs"
+            }
         },
         "platforms": [
             "android"

@@ -1,9 +1,16 @@
-import { Component } from '@angular/core';
+import { Component,ElementRef,OnInit } from '@angular/core';
 import { UserAuth } from '../../providers/user';
 import { NavController, App, LoadingController, ToastController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 
 
+import { Facebook } from '@ionic-native/facebook';
+import { AuthService } from '../../providers/auth-service';
+import {AuthProviders, AuthMethods,  AngularFire, FirebaseListObservable } from 'angularfire2';
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
+
+import firebase from 'firebase';
 @Component({
   selector: 'page-profile',
   templateUrl: 'profile.html'
@@ -11,49 +18,12 @@ import { LoginPage } from '../login/login';
 
   
 export class ProfilePage {
+  name: string;
+   constructor() {
 
-loading: any;
-  isLoggedIn: boolean = false;
+    window.localStorage.setItem('name', 'email');
 
-  constructor(public app: App, public navCtrl: NavController, public userauth: UserAuth, public loadingCtrl: LoadingController, private toastCtrl: ToastController) {
-    if(localStorage.getItem("token")) {
-      this.isLoggedIn = true;
-    }
+        this.name = window.localStorage.getItem('foo');
+        console.log(name);  
   }
-
-  logout() {
-    this.userauth.logout().then((result) => {
-      this.loading.dismiss();
-      let nav = this.app.getRootNav();
-      nav.setRoot(LoginPage);
-    }, (err) => {
-      this.loading.dismiss();
-      this.presentToast(err);
-    });
-  }
-
-  showLoader(){
-    this.loading = this.loadingCtrl.create({
-        content: 'Authenticating...'
-    });
-
-    this.loading.present();
-  }
-
-  presentToast(msg) {
-    let toast = this.toastCtrl.create({
-      message: msg,
-      duration: 3000,
-      position: 'bottom',
-      dismissOnPageChange: true
-    });
-
-    toast.onDidDismiss(() => {
-      console.log('Dismissed toast');
-    });
-
-    toast.present();
-  }
-
-
   }

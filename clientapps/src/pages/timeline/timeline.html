@@ -1,19 +1,28 @@
 <ion-header>
   <ion-navbar color="primary">
+    
     <ion-title color="light"  style="text-align: center">
       Timeline
     </ion-title>
      <ion-buttons end>
-      <button ion-button icon-only (click)="presentPopover($ev)">
-        <ion-icon name="more"></ion-icon>
+       
+      <button ion-button icon-only (click)="reload()">
+        <ion-icon name="refresh"></ion-icon>
       </button>
+      
+          <!--<ion-buttons end>
+            <button (click)="presentPopover($ev)">
+              <ion-icon name="arrow-dropdown"></ion-icon>
+            </button>
+          </ion-buttons>-->
+
 </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content class="cards-bg">
   <ion-card *ngFor="let post of data">
-
+   
     <img class="size-img" [src]="post.lastImage" *ngIf="post.lastImage">
 
     <ion-card-content>
@@ -26,17 +35,17 @@
 
     <ion-row no-padding>
       <ion-col>
-        <button ion-button clear small color="danger" icon-left>
-          <ion-icon name='star'></ion-icon>
-          Favorite
+        <button ion-button clear small color="danger" icon-left (click)="deletePost(post)">
+          <ion-icon name='delete'></ion-icon>
+          Delete
         </button>
       </ion-col>
-      <ion-col text-center>
+      <!--<ion-col text-center>
         <button ion-button clear small color="danger" icon-left>
           <ion-icon name='text'></ion-icon>
           Comment
         </button>
-      </ion-col>
+      </ion-col>-->
       <ion-col text-right>
         <button ion-button clear small color="danger" icon-left>
           <ion-icon name='share-alt'></ion-icon>

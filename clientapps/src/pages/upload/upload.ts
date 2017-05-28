@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { TabsPage } from '../tabs/tabs';
+import { TimelinePage } from '../timeline/timeline';
 import { NgForm } from '@angular/forms';
 import { NavController, NavParams, ToastController, LoadingController, ActionSheetController,Loading} from 'ionic-angular';
 import { Camera } from 'ionic-native';
@@ -8,7 +10,7 @@ import { AuthHttp } from 'angular2-jwt';
 import 'rxjs/add/operator/map';
 //,File, Transfer, FilePat
 
-let apiURL = 'http://172.18.16.97/obeythetraffic/adminweb/public/api/postings';
+let apiURL = 'http://10.103.117.15/obeythetraffic/adminweb/public/api/postings';
 
 declare var  cordova:any;
 @Component({
@@ -25,6 +27,7 @@ export class UploadPage {
   loading:Loading;
   authHttp:AuthHttp;
   base64Image: string;
+  
 submitted = false;
   constructor(
     public navCtrl: NavController, 
@@ -37,11 +40,16 @@ submitted = false;
  
   takePicture(){
     Camera.getPicture({
+        quality: 100,
         destinationType: Camera.DestinationType.DATA_URL,
+        sourceType: Camera.PictureSourceType.CAMERA,
+        allowEdit: true,
+        encodingType: Camera.EncodingType.JPEG,
+        saveToPhotoAlbum:true,
         targetWidth: 600,
         targetHeight: 600
     }).then((imageData) => {
-      this.base64Image = imageData;
+      this.base64Image = 'data:image/jpeg;base64,' + imageData;
       alert(this.base64Image);
     //  this.postUpdatePicture();
       }, (err) => {
@@ -55,7 +63,7 @@ submitted = false;
         targetWidth: 600,
         targetHeight: 600
     }).then((imageData) => {
-      this.base64Image = imageData;
+      this.base64Image = 'data:image/jpeg;base64,' + imageData;
      // this.postUpdatePicture();
       }, (err) => {
     });
@@ -93,7 +101,10 @@ onUpdate(form: NgForm) {
       plat_nomor: this.plat_nomor,
       pelanggaran: this.pelanggaran, 
       lastImage: this.base64Image
-      });
+    });
+    alert("Postingan berhasil dikirim. Terima kasih telah membantu mengatasi pelanggaran");
+    this.navCtrl.setRoot(TabsPage);
+    
       this.http.post(apiURL,param).subscribe(res => {
       	
         let response = res.json();
@@ -115,7 +126,8 @@ onUpdate(form: NgForm) {
   showAlert(message: string){
     let toast = this.toastCtrl.create({
       message: message,
-      duration: 3000
+      duration: 3000,
+      position: 'middle'
     });
     toast.present();
 }

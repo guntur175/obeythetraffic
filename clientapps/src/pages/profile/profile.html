@@ -9,12 +9,12 @@
 </ion-header>
 
 <ion-content>
-    <div class="prof1">
+    <div class="prof1" *ngFor="let profiles of user">
         <img src="assets/bot.png">
     </div>
-    <div class="prof2">
+    <div class="prof2" *ngFor="let profiles of user">
         <ion-list no-lines>
-            <h4>Guntur Putra Pratama</h4>
+            <h4>{{ profiles.name }}</h4>
             <h4>Gppratama17@gmail.com</h4>
             <h4>085289628556</h4>
         </ion-list>
