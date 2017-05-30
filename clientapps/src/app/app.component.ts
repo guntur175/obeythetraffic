@@ -12,8 +12,8 @@ import { OnboardingPage } from '../pages/onboarding/onboarding';
   templateUrl: 'app.html'
 })
 export class MyApp {
-// rootPage = TabsPage;
-rootPage = LoginPage;
+rootPage = OnboardingPage;
+// rootPage = LoginPage;
 
 
   constructor(platform: Platform) {

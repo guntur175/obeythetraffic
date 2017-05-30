@@ -5146,7 +5146,7 @@ textarea.input-group-sm>.input-group-btn>.btn {
 .navbar-brand {
     float: left;
     height: 50px;
-    padding: 15px 15px;
+    padding: 10px;
     font-size: 18px;
     line-height: 20px
 }
@@ -5157,7 +5157,10 @@ textarea.input-group-sm>.input-group-btn>.btn {
 }
 
 .navbar-brand>img {
-    display: block
+    display: block;
+    height: 40px;
+    width: 40px;
+    padding: 0 0;
 }
 
 @media (min-width:768px) {

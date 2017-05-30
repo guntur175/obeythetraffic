@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::resource('postings', 'PostingController');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('home', 'PostingController@index')->name('home');
 Route::get('/trash', 'PostingController@getTrash');
 Route::get('forcedelete/{id}', 'PostingController@forceDelete');
 Route::get('restore/{id}', 'PostingController@getRestore');

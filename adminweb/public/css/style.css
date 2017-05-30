@@ -313,7 +313,7 @@ header {
 }
 
 .sticky-header.fixed .navbar-default .navbar-brand>img {
-    height: 60px;
+    height: 20px;
 }
 
 .sticky-header.fixed .navbar-default .nav>li>a {

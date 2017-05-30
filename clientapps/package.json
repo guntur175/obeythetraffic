@@ -21,7 +21,7 @@
         "@angular/platform-server": "2.2.1",
         "@ionic-native/camera": "^3.6.1",
         "@ionic-native/core": "^3.7.0",
-        "@ionic-native/facebook": "^3.7.0",
+        "@ionic-native/facebook": "^3.10.3",
         "@ionic/storage": "1.1.7",
         "angularfire2": "^2.0.0-beta.8",
         "cordova-android": "^6.2.3",
@@ -29,7 +29,9 @@
         "cordova-plugin-compat": "^1.1.0",
         "cordova-plugin-console": "^1.0.5",
         "cordova-plugin-device": "^1.1.4",
-        "cordova-plugin-facebook4": "file:node_modules\\cordova-plugin-facebook4",
+        "cordova-plugin-dialogs": "^1.3.3",
+        "cordova-plugin-facebook4": "git+https://github.com/jeduan/cordova-plugin-facebook4.git",
+        "cordova-plugin-inappbrowser": "^1.7.1",
         "cordova-plugin-splashscreen": "^4.0.3",
         "cordova-plugin-statusbar": "^2.2.1",
         "cordova-plugin-whitelist": "^1.3.1",
@@ -71,8 +73,10 @@
             "ionic-plugin-keyboard": {},
             "cordova-plugin-facebook4": {
                 "APP_ID": "415689372112662",
-                "APP_NAME": "tabs"
-            }
+                "APP_NAME": "ObeyTheTraffic"
+            },
+            "cordova-plugin-inappbrowser": {},
+            "cordova-plugin-dialogs": {}
         },
         "platforms": [
             "android"

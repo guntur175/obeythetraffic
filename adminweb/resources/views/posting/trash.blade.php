@@ -24,8 +24,8 @@
                             <td>{{ $posting -> jenis_kendaraan }}</td>
                             <td>{{ $posting -> plat_nomor }}</td>
                             <td>
-                                <img src="{{ url('/img/',$posting->lastImage) }}" width="640" height="480" alt="..."  class="img-responsive">
-                            </td>
+                               <img src="{{ $posting -> lastImage }}" style="height:200px;width:200px;text-align:center"> 
+                               </td>
                             <td>{{ $posting -> created_at }}</td>
                             <td>{{ $posting -> updated_at }}</td>
                             <td>

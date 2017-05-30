@@ -52,9 +52,9 @@
 
                             </td>
                             <td>{{ $posting -> created_at }}</td>
-                            <!--<td>{{ $posting -> updated_at }}</td>-->
+                           <!-- <td>{{ $posting -> updated_at }}</td>-->
                             <td>
-                                <a href = "{{ route('postings.edit', $posting->id)}}" class = "btn btn-xs btn-success">Edit</a> |
+                                <a href = "{{ route('postings.edit', $posting->id)}}" class = "btn btn-xs btn-success">Edit</a>
                                 {!! Form::model($posting, ['route' => ['postings.destroy', $posting], 'method' => 'delete', 'class' => 'form-inline'] ) !!}
                                 {!! Form::submit('delete', ['class'=>'btn btn-xs btn-danger js-submit-confirm']) !!}
                                 {!! Form::close() !!}

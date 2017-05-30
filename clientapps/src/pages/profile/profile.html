@@ -9,17 +9,17 @@
 </ion-header>
 
 <ion-content>
-    <div class="prof1" *ngFor="let profiles of user">
-        <img src="assets/bot.png">
+    <div class="prof1">
+        <img *ngIf="user.picture" src="{{ user.picture }}">
     </div>
-    <div class="prof2" *ngFor="let profiles of user">
-        <ion-list no-lines>
-            <h4>{{ profiles.name }}</h4>
-            <h4>Gppratama17@gmail.com</h4>
-            <h4>085289628556</h4>
-        </ion-list>
+    <div class="prof2">
+        <ion-label *ngIf="user.name">{{user.name}}</ion-label>
+        <ion-label *ngIf="user.email">{{user.email}}</ion-label>
+        <ion-label *ngIf="user.userId">{{user.userId}}</ion-label>
+        <ion-label *ngIf="user.providerr">{{user.providerr}}</ion-label>
+
     </div>
 </ion-content>
 <ion-footer>
-    <button ion-button outline full color="danger" (click)="something()">Edit Profile</button>
+    <button ion-button outline full color="danger" (click)="something()">Logout</button>
 </ion-footer>

@@ -10,7 +10,7 @@ import { AuthHttp } from 'angular2-jwt';
 import 'rxjs/add/operator/map';
 //,File, Transfer, FilePat
 
-let apiURL = 'http://10.103.117.15/obeythetraffic/adminweb/public/api/postings';
+let apiURL = 'http://192.168.43.75/obeythetraffic/adminweb/public/api/postings';
 
 declare var  cordova:any;
 @Component({
@@ -50,7 +50,7 @@ submitted = false;
         targetHeight: 600
     }).then((imageData) => {
       this.base64Image = 'data:image/jpeg;base64,' + imageData;
-      alert(this.base64Image);
+    
     //  this.postUpdatePicture();
       }, (err) => {
         alert(err);
@@ -102,7 +102,7 @@ onUpdate(form: NgForm) {
       pelanggaran: this.pelanggaran, 
       lastImage: this.base64Image
     });
-    alert("Postingan berhasil dikirim. Terima kasih telah membantu mengatasi pelanggaran");
+    alert("Postingan berhasil dikirim. Terima kasih telah membantu mengatasi pelanggaran lalu lintas.");
     this.navCtrl.setRoot(TabsPage);
     
       this.http.post(apiURL,param).subscribe(res => {

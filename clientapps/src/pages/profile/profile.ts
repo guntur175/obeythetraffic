@@ -1,5 +1,4 @@
 import { Component,ElementRef,OnInit } from '@angular/core';
-import { UserAuth } from '../../providers/user';
 import { NavController, App, LoadingController, ToastController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 
@@ -18,12 +17,14 @@ import firebase from 'firebase';
 
   
 export class ProfilePage {
-  name: string;
+
    constructor() {
 
-    window.localStorage.setItem('name', 'email');
+        let user = JSON.parse(window.localStorage.getItem('user'));
+        console.log(user);  
 
-        this.name = window.localStorage.getItem('foo');
-        console.log(name);  
-  }
+         return{
+            user: user
+        };  
+    }
   }

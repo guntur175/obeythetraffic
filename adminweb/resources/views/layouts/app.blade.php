@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ config('app.locale') }}">
+<html lang="{{ config('app.global') }}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
 
     <title>{{ config('app.name', 'Obey The Traffic') }}</title>
-
+    
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
@@ -44,6 +44,7 @@
                     </button>
 
                     <!-- Branding Image -->
+                    <a class="navbar-brand" href="{{ url('/') }}"><img src="img/unnamed.png"></a>
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name', 'Obey The Traffic') }}
                     </a>
@@ -100,8 +101,10 @@
                 </div>
             </div>
         </nav>
-        @include('layouts.flash')
+        
+        
         <br><br><br><br><br><br><br>
+        @include('layouts.flash')
         @yield('content')
     </div>
 

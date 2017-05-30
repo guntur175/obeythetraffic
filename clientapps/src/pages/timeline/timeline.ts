@@ -4,7 +4,7 @@ import 'rxjs/add/operator/map';
 import { NavController, PopoverController} from 'ionic-angular';
 import { ViewerPage } from '../viewer/viewer';
 
-let apiURL = 'http://10.103.117.15/obeythetraffic/adminweb/public/api/postings';
+let apiURL = 'http://192.168.43.75/obeythetraffic/adminweb/public/api/postings';
 
 @Component({
   selector: 'page-contact',

@@ -47,16 +47,15 @@ class PostingController extends Controller
     public function store(Request $request)
     {        
         $rules = [
-            'pelanggaran' => 'required',
-            'jenis_kendaraan' => 'required',
-            'plat_nomor' => 'required',
-            'lastImage' => 'mimes:jpeg,jpg,bmp,png|max:10240',
+            'pelanggaran' => 'required|max:255',
+            'jenis_kendaraan' => 'required|max:10',
+            'plat_nomor' => 'required|max:8',
+            'lastImage' => 'required|mimes:jpeg,jpg,png|max:10240'
         ];
 
         $messages = [
             'required' => 'Field harus di isi alias tidak boleh kosong',
-            'max' => 'Ukuran photo maksimal 10 MB ',
-            'mimes' => 'Photo harus berekstensi JPG, JPEG, BMP, atau PNG'
+            'mimes' => 'Photo harus berekstensi JPG, JPEG, atau PNG'
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -65,8 +64,8 @@ class PostingController extends Controller
         }
 
         $data = $request->only('pelanggaran','jenis_kendaraan', 'plat_nomor');
-
-        if ($request->hasFile('lastImage')){
+        
+        if ($request->hasFile('lastImage')->isValid()){
             $data['lastImage'] = $this->savePhoto($request->file('lastImage'));
         } 
        
@@ -85,7 +84,7 @@ class PostingController extends Controller
         
         $fileName = $photo->getClientOriginalName();
         $ip = request()->ip();
-        $getPath = 'http://10.107.217.24/obeythetraffic/adminweb/public/img/' . $fileName;
+        $getPath = 'http://192.168.43.75/obeythetraffic/adminweb/public/img/' . $fileName;
         // $getPath = 'http://' . $ip . '/obeythetraffic/adminweb/public/img/' . $fileName;
         $destinationPath = public_path() . DIRECTORY_SEPARATOR . 'img/';
         $photo -> move($destinationPath, $fileName, $getPath);
@@ -131,7 +130,7 @@ class PostingController extends Controller
             'pelanggaran' => 'required',
             'jenis_kendaraan' => 'required',
             'plat_nomor' => 'required',
-            'lastImage' => 'mimes:jpeg,jpg,bmp,png|max:10240',
+            'lastImage' => 'required|mimes:jpeg,jpg,bmp,png|max:10240',
         ];
 
         $messages = [
@@ -173,7 +172,7 @@ class PostingController extends Controller
     {
         $posting = \App\Posting::find($id);
         $posting->delete();
-        Session::flash('flash_notification', ["level"=>"success", "message"=>"Berhasil meenghapus pelanggaran dari database"]);
+        Session::flash('flash_notification', ["level"=>"success", "message"=>"Berhasil menghapus pelanggaran dari database"]);
         return redirect()->route('postings.index');
     }
 
@@ -182,7 +181,7 @@ class PostingController extends Controller
         $posting = \App\Posting::withTrashed()->find($id);
         if($posting->lastImage !== '') $this->deletePhoto($posting->lastImage);
         $posting->forceDelete();
-        Session::flash('flash_notification', ["level"=>"success", "message"=>"Berhasil meenghapus permanan pelanggaran dari database"]);
+        Session::flash('flash_notification', ["level"=>"success", "message"=>"Berhasil meenghapus permanen pelanggaran dari database"]);
         return redirect()->route('postings.index');
     }
 

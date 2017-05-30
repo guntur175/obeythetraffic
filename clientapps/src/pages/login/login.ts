@@ -24,7 +24,7 @@ import firebase from 'firebase';
 })
 export class LoginPage {
 
-   root:any;
+    root:any;
   constructor(public navCtrl: NavController,public af: AngularFire, public element: ElementRef) {
     this.element.nativeElement;
   }
@@ -35,22 +35,33 @@ export class LoginPage {
   }
   onFacebookLogin(e){
   	let self = this;
-  	this.af.auth.login({
+    this.af.auth.login({
   		provider: AuthProviders.Facebook,
   		method: AuthMethods.Popup
-  	}).then(function(response){
+  	})
+    .then(function(response){
+      
   		let user = {
+        providerr:response.auth.providerId,
+        userId:response.auth.uid,
         name: response.auth.displayName,
   			email:response.auth.email,
   			picture:response.auth.photoURL
   		};
-  		window.localStorage.setItem('user',JSON.stringify(user));
-      this.navCtrl.setRoot(TabsPage);
+      
+      
+    	window.localStorage.setItem('user',JSON.stringify(user));
+      
+    self.onSignInSuccess();
+      	
+  	
 
       //app.setRootpage(TabsPage);
   	}).catch(function(error){
   		console.log(error);
-  	});
+});
+    
+  
 }
 //   data:any;
   
@@ -61,19 +72,23 @@ export class LoginPage {
 //  this.items = af.database.list('/items');
 
 //   }
-//   signInWithFacebook(): void {
-//     this._auth.signInWithFacebook()
-//       .then(() => this.onSignInSuccess());
-//   }
+  // signInWithFacebook(): void {
+  //   this.auth.signInWithFacebook()
+  //     .then(() => this.onSignInSuccess());
+  // }
 
-//   private onSignInSuccess(): void {
+  private onSignInSuccess(): void {
     
-//     this.navCtrl.setRoot(TabsPage);
-//   }
+    this.navCtrl.setRoot(TabsPage);
+  }
 
+  skip(){
+    this.navCtrl.setRoot(TabsPage);
+  }
+}
 //   ionViewDidLoad() {
 //   }
-}    
+    
   //   facebookLogin(){
 //     this.facebook.login(['email']).then( (response) => {
 //         const facebookCredential = firebase.auth.FacebookAuthProvider
