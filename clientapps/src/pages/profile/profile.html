@@ -9,17 +9,26 @@
 </ion-header>
 
 <ion-content>
+    <ion-card *ngIf="userProfile">
     <div class="prof1">
-        <img *ngIf="user.picture" src="{{ user.picture }}">
+          <img *ngIf="userProfile.photoURL" src="{{ userProfile.photoURL }}">
     </div>
-    <div class="prof2">
-        <ion-label *ngIf="user.name">{{user.name}}</ion-label>
-        <ion-label *ngIf="user.email">{{user.email}}</ion-label>
-        <ion-label *ngIf="user.userId">{{user.userId}}</ion-label>
-        <ion-label *ngIf="user.providerr">{{user.providerr}}</ion-label>
+  <ion-card-content>
+    <ion-card-title>
+      {{ userProfile.displayName }}
+    </ion-card-title>
+    <!--<ion-label  *ngIf="userProfile.email">{{ userProfile.email }}</ion-label>
+    -->
+  </ion-card-content>
+</ion-card>
+    <!--<div class="prof2">
+        <ion-label *ngIf="userProfile.name">{{userProfile.name}}</ion-label>
+        <ion-label *ngIf="userProfile.email">{{userProfile.email}}</ion-label>
+        <ion-label *ngIf="userProfile.userId">{{userProfile.userId}}</ion-label>
+        <ion-label *ngIf="userProfile.providerr">{{userProfile.providerr}}</ion-label>
 
-    </div>
+    </div>-->
 </ion-content>
-<ion-footer>
-    <button ion-button outline full color="danger" (click)="something()">Logout</button>
-</ion-footer>
+<!--<ion-footer>
+    <button ion-button outline full color="danger" (click)="logoutFB()">Logout</button>
+</ion-footer>-->

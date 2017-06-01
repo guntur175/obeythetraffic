@@ -23,101 +23,85 @@ import firebase from 'firebase';
   templateUrl: 'login.html'
 })
 export class LoginPage {
-
+    userProfile:any=null;
     root:any;
-  constructor(public navCtrl: NavController,public af: AngularFire, public element: ElementRef) {
+  constructor(public toastCtrl:ToastController, private facebook: Facebook,public navCtrl: NavController,public af: AngularFire, public element: ElementRef) {
     this.element.nativeElement;
   }
-  ngOnInit(){
-    this.root = this.element.nativeElement;
-  	var fbBtn =  this.root.querySelector('#fb-login');
-  	fbBtn.addEventListener('click',this.onFacebookLogin.bind(this));
+facebookLogin(){
+    let self = this;
+    this.facebook.login(['email']).then( (response) => {
+        const facebookCredential = firebase.auth.FacebookAuthProvider
+            .credential(response.authResponse.accessToken);
+
+        firebase.auth().signInWithCredential(facebookCredential)
+        .then((success) => {
+       
+            // console.log("Firebase success: " + JSON.stringify(success));
+    
+            this.userProfile = success;
+            this.showAlert("Selamat datang " + this.userProfile.displayName);
+            
+            let userProfile =	window.localStorage.setItem('userProfile',JSON.stringify(success));
+            
+   
+        })
+        .catch((error) => {
+            console.log("Firebase failure: " + JSON.stringify(error));
+        });
+
+    }).catch((error) => { console.log(error) });
+    self.navCtrl.setRoot(TabsPage);
   }
-  onFacebookLogin(e){
-  	let self = this;
-    this.af.auth.login({
-  		provider: AuthProviders.Facebook,
-  		method: AuthMethods.Popup
-  	})
-    .then(function(response){
+
+    showError(err: any){  
+    err.status==0? 
+    this.showAlert("Tidak ada koneksi. Cek kembali sambungan Internet perangkat Anda"):
+    this.showAlert("Tidak dapat menyambungkan ke server. Mohon muat kembali halaman ini");
+  }
+   showAlert(message: string){
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 3000,
+      position: 'middle'
+    });
+    toast.present();
+
+  //------------------------------------
+//   ngOnInit(){
+//     this.root = this.element.nativeElement;
+//   	var fbBtn =  this.root.querySelector('#fb-login');
+//   	fbBtn.addEventListener('click',this.onFacebookLogin.bind(this));
+//   }
+//   onFacebookLogin(e){
+//   	let self = this;
+//     this.af.auth.login({
+//   		provider: AuthProviders.Facebook,
+//   		method: AuthMethods.Popup
+//   	})
+//     .then(function(response){
       
-  		let user = {
-        providerr:response.auth.providerId,
-        userId:response.auth.uid,
-        name: response.auth.displayName,
-  			email:response.auth.email,
-  			picture:response.auth.photoURL
-  		};
+//   		let user = {
+//         providerr:response.auth.providerId,
+//         userId:response.auth.uid,
+//         name: response.auth.displayName,
+//   			email:response.auth.email,
+//   			picture:response.auth.photoURL
+//   		};
       
       
-    	window.localStorage.setItem('user',JSON.stringify(user));
+//     	let userProfile = window.localStorage.setItem('userProfile',JSON.stringify(user));
       
-    self.onSignInSuccess();
+  
       	
   	
 
-      //app.setRootpage(TabsPage);
-  	}).catch(function(error){
-  		console.log(error);
-});
+//       //app.setRootpage(TabsPage);
+//   	}).catch(function(error){
+//   		console.log(error);
+// });
     
   
+//   }
+   }
 }
-//   data:any;
-  
-//    items: FirebaseListObservable<any[]>;
-
-//   constructor(public af: AngularFire ,public _auth:AuthService,public navCtrl: NavController, public navParams: NavParams, public userauth:UserAuth, public loadingCtrl: LoadingController, private toastCtrl: ToastController) 
-//   {
-//  this.items = af.database.list('/items');
-
-//   }
-  // signInWithFacebook(): void {
-  //   this.auth.signInWithFacebook()
-  //     .then(() => this.onSignInSuccess());
-  // }
-
-  private onSignInSuccess(): void {
-    
-    this.navCtrl.setRoot(TabsPage);
-  }
-
-  skip(){
-    this.navCtrl.setRoot(TabsPage);
-  }
-}
-//   ionViewDidLoad() {
-//   }
-    
-  //   facebookLogin(){
-//     this.facebook.login(['email']).then( (response) => {
-//         const facebookCredential = firebase.auth.FacebookAuthProvider
-//             .credential(response.authResponse.accessToken);
-
-//         firebase.auth().signInWithCredential(facebookCredential)
-//         .then((success) => {
-//             console.log("Firebase success: " + JSON.stringify(success));
-//             this.userProfile = success;
-//             this.navCtrl.push(TabsPage);
-//         })
-//         .catch((error) => {
-//             console.log("Firebase failure: " + JSON.stringify(error));
-//         });
-
-//     }).catch((error) => { console.log(error) });
-// }
-//   doLogin() 
-//   {
-//     this.showLoader();
-//     this.userauth.login(this.loginData).then((result) => {
-//       this.loading.dismiss();
-//       this.data = result;
-//       localStorage.setItem('token', this.data.access_token);
-//       this.navCtrl.setRoot(TabsPage);
-//     }, (err) => {
-//       this.loading.dismiss();
-//       this.presentToast(err);
-//     });
-//   }
- 
-

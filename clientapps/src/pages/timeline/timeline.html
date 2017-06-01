@@ -22,7 +22,7 @@
 
 <ion-content class="cards-bg">
   <ion-card *ngFor="let post of data">
-   
+    
     <img class="size-img" [src]="post.lastImage" *ngIf="post.lastImage">
 
     <ion-card-content>
@@ -31,14 +31,15 @@
       </ion-card-title>
       <p>Jenis Pelanggaran  : {{post.pelanggaran}}</p>
       <p>Plat Nomor         : {{post.plat_nomor}}</p>
+      <p>Hari Kejadian      : {{post.created_at}}</p>
     </ion-card-content>
 
     <ion-row no-padding>
       <ion-col>
-        <button ion-button clear small color="danger" icon-left (click)="deletePost(post)">
+        <!--<button ion-button clear small color="danger" icon-left (click)="deletePost(post)">
           <ion-icon name='delete'></ion-icon>
           Delete
-        </button>
+        </button>-->
       </ion-col>
       <!--<ion-col text-center>
         <button ion-button clear small color="danger" icon-left>
@@ -47,10 +48,10 @@
         </button>
       </ion-col>-->
       <ion-col text-right>
-        <button ion-button clear small color="danger" icon-left>
+        <!--<button ion-button clear small color="danger" icon-left>
           <ion-icon name='share-alt'></ion-icon>
           Share
-        </button>
+        </button>-->
       </ion-col>
     </ion-row>
   </ion-card>

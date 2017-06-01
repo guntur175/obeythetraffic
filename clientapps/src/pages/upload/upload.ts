@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 
 import { TabsPage } from '../tabs/tabs';
 import { TimelinePage } from '../timeline/timeline';
-import { NgForm } from '@angular/forms';
+import { UsernameValidator } from  '../../validators/textvalidator';
+
+import { NgForm, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavController, NavParams, ToastController, LoadingController, ActionSheetController,Loading} from 'ionic-angular';
 import { Camera } from 'ionic-native';
 import { Http,Headers,RequestOptions  } from '@angular/http';
@@ -19,24 +21,37 @@ declare var  cordova:any;
 })
 export class UploadPage {
 
+  formgroup:FormGroup;
+  submitAttempt:false;
+
   jenis_kendaraan:any;
   plat_nomor:string;
   pelanggaran:string;
   lastImage:string;
+  
   loadCtrl: LoadingController;
   loading:Loading;
   authHttp:AuthHttp;
   base64Image: string;
   
-submitted = false;
+  submitted = false;
   constructor(
     public navCtrl: NavController, 
     public http: Http,
     public navParams: NavParams,
     public actionSheetCtrl: ActionSheetController,
     public toastCtrl: ToastController,
-    public loadingCtrl: LoadingController
-  ) { }
+    public loadingCtrl: LoadingController,
+    public formBuilder: FormBuilder
+  ) {
+
+    this.formgroup = formBuilder.group({
+        jenis_kendaraan: ['', Validators.compose([Validators.maxLength(10), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
+        plat_nomor: ['', Validators.compose([Validators.maxLength(9), Validators.pattern('[a-zA-Z,1-9 ]*'), Validators.required])],
+        pelanggaran: ['', Validators.compose([Validators.maxLength(255), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
+        lastImage: ['']
+    });
+   }
  
   takePicture(){
     Camera.getPicture({

@@ -11,9 +11,9 @@
     <div>
       <ion-label style="text-align: center;">Login With</ion-label>
 
-      <button round full ion-button medium color="primary" id="fb-login">Facebook</button>
+      <button round full ion-button medium color="primary" (click)="facebookLogin()">Facebook</button>
       <br>
-      <button round full ion-button medium color="danger" (click)="signInWithFacebook()">Email</button>
+      <!--<button round full ion-button medium color="danger" id="fb-login">Email</button>-->
       <!--<ion-label style="text-align: center;">Or have account?</ion-label>
       <br>
     </div>
@@ -44,7 +44,6 @@
     <br>
     <br>
   </ion-list>
-  <label (click)="skip()">.</label>
 </ion-content>
 
 <!--

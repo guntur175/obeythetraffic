@@ -17,6 +17,7 @@ Route::resource('postings', 'Api\PostingController');
 \
 Route::get('postings', 'Api\PostingController@index')->name('posting');
 
+Route::get('forcedelete/{id}', 'PostingController@forceDelete');
 Route::post('postings', 'Api\PostingController@store');
 Route::get('breweries', ['middleware' => 'cors', function()
 {

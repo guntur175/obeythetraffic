@@ -19,7 +19,7 @@ class PostingController extends Controller
     public function index(Request $request)
     {
         $query = $request->get('query');
-        $postings = \App\Posting::where('plat_nomor', 'LIKE', '%'.$query.'%') -> orWhere('pelanggaran', 'LIKE', '%'.$query.'%') -> orderBy('id') -> paginate(5);
+        $postings = \App\Posting::where('plat_nomor', 'LIKE', '%'.$query.'%') -> orWhere('pelanggaran', 'LIKE', '%'.$query.'%') -> orderBy('id', 'desc') -> paginate(5);
         return view('posting.index', compact('postings'));
     }
 
@@ -84,7 +84,7 @@ class PostingController extends Controller
         
         $fileName = $photo->getClientOriginalName();
         $ip = request()->ip();
-        $getPath = 'http://192.168.43.75/obeythetraffic/adminweb/public/img/' . $fileName;
+        $getPath = 'http://10.100.152.0/obeythetraffic/adminweb/public/img/' . $fileName;
         // $getPath = 'http://' . $ip . '/obeythetraffic/adminweb/public/img/' . $fileName;
         $destinationPath = public_path() . DIRECTORY_SEPARATOR . 'img/';
         $photo -> move($destinationPath, $fileName, $getPath);

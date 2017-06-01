@@ -17,7 +17,7 @@ class PostingController extends \App\Http\Controllers\Controller
      */
     public function index(Request $request)
     {
-         $postings = Posting::all();
+         $postings = Posting::orderBy('id', 'desc')->get();
          return $postings;
     }
 
